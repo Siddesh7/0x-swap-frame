@@ -11,7 +11,7 @@ export async function POST(req: any) {
   // {
   //     "sellToken": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
   //     "buyToken": "0xfff9976782d46cc05630d1f6ebab18b2324d6b14",
-  //     "sellAmount": "1000",
+  //     "buyAmount": "1000",
   //     "takerAddress":"0xb44a29524433dBC639C35124459c741bC241d4f4"
   //   }
   const account = privateKeyToAccount(process.env.PRIVATE_KEY! as any);

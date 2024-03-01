@@ -33,15 +33,17 @@ export async function POST(req: any) {
         }
       )
       .then(async (response) => {
-        const request = await walletClient.prepareTransactionRequest({
-          to: response.data.to,
-          data: response.data.data,
-        });
+        console.log(response.data);
+        // const request = await walletClient.prepareTransactionRequest({
+        //   to: response.data.to,
+        //   data: response.data.data,
+        //   value: BigInt(response.data.value),
+        // });
 
-        const hash = await walletClient.sendTransaction(request);
-        console.log(hash);
+        // const hash = await walletClient.sendTransaction(request);
+        // console.log(hash);
         return new NextResponse(
-          JSON.stringify({hash: hash, data: response.data}),
+          JSON.stringify({hash: "hash", data: response.data}),
           {
             status: 200,
             headers: {

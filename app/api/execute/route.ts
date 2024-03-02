@@ -54,36 +54,33 @@ export async function POST(req: any) {
     chain: polygon,
     transport: http(process.env.ALCHEMY_RPC_URL || ""),
   });
-  let hash;
-  try {
-    await axios
-      .get(
-        `https://polygon.api.0x.org/swap/v1/quote?buyToken=${buyToken}&sellToken=${sellToken}&buyAmount=${buyAmount}`,
-        {
-          headers: {
-            "0x-api-key": process.env.ZEROX_API_KEY || "",
-          },
-        }
-      )
-      .then(async (response) => {
-        let buyAmount = Number(response.data.buyAmount) * 1.03;
 
-        walletClient.writeContract({
-          account,
-          address: ADDRESS,
-          abi: ABI,
-          functionName: "fillQuote",
-          args: [
-            response.data.sellTokenAddress,
-            response.data.buyTokenAddress,
-            response.data.allowanceTarget,
-            response.data.to,
-            response.data.data,
-            buyAmount,
-            address,
-          ],
-        });
-      });
+  try {
+    const response: any = await axios.get(
+      `https://polygon.api.0x.org/swap/v1/quote?buyToken=${buyToken}&sellToken=${sellToken}&buyAmount=${buyAmount}`,
+      {
+        headers: {
+          "0x-api-key": process.env.ZEROX_API_KEY || "",
+        },
+      }
+    );
+    let adjustedBuyAmount = Number(response.data.buyAmount) * 1.03;
+    walletClient.writeContract({
+      account,
+      address: ADDRESS,
+      abi: ABI,
+      functionName: "fillQuote",
+      args: [
+        response.data.sellTokenAddress,
+        response.data.buyTokenAddress,
+        response.data.allowanceTarget,
+        response.data.to,
+        response.data.data,
+        adjustedBuyAmount,
+        address,
+      ],
+    });
+
     return new NextResponse(
       `<!DOCTYPE html>
       <html>
@@ -94,10 +91,10 @@ export async function POST(req: any) {
           <meta name="fc:frame" content="vNext" />
       
           <meta name="fc:frame:image" content="${process.env.NEXT_PUBLIC_HOST}/api/image?section=4" />
-            <meta name="fc:frame:button:1" content="Show in Polygonscan" />
-               <meta name="fc:frame:button:2" content="Show in Polygonscan" />
-          <meta name="fc:frame:button:2:action" content="link" />
-          <meta name="fc:frame:button:2:target" content=https://polygonscan.com/address/${address} />
+     
+               <meta name="fc:frame:button:1" content="Show in Polygonscan" />
+          <meta name="fc:frame:button:1:action" content="link" />
+          <meta name="fc:frame:button:1:target" content=https://polygonscan.com/address/${address} />
          
         </head>
         <body/>

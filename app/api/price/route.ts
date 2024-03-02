@@ -1,11 +1,6 @@
 import {NextRequest, NextResponse} from "next/server";
-import {getSSLHubRpcClient, Message} from "@farcaster/hub-nodejs";
 import axios from "axios";
 import {getTokenName} from "@/app/lib/constants";
-import {getAddressForFid} from "frames.js";
-
-const HUB_URL = "nemes.farcaster.xyz:2283";
-const hubClient = getSSLHubRpcClient(HUB_URL);
 
 export async function POST(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
@@ -58,8 +53,7 @@ export async function POST(req: NextRequest) {
       const sellTokenName = getTokenName(sellToken);
       const buyTokenName = getTokenName(buyToken);
       imageUrl = `${process.env.NEXT_PUBLIC_HOST}/api/image?section=3&buyToken=${buyTokenName}&sellToken=${sellTokenName}&buyAmount=${response.data.buyAmount}&sellAmount=${response.data.sellAmount}&buyTokenDecimal=${buyTokenDecimal}&sellTokenDecimal=${sellTokenDecimal}`;
-      // postUrl = `${process.env.NEXT_PUBLIC_HOST}/api/execute?buyToken=${buyToken}&sellToken=${sellToken}&buyAmount=${response.data.buyAmount}`;
-      postUrl = `https://needed-sensibly-caribou.ngrok-free.app/api/execute?buyToken=${buyToken}&sellToken=${sellToken}&buyAmount=${response.data.buyAmount}`;
+      postUrl = `${process.env.NEXT_PUBLIC_HOST}/api/execute?buyToken=${buyToken}&sellToken=${sellToken}&buyAmount=${response.data.buyAmount}`;
     });
 
   return new NextResponse(

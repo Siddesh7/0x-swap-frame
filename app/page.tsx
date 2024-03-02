@@ -1,7 +1,7 @@
 import {Metadata} from "next";
 
-// const postUrl = `${process.env.NEXT_PUBLIC_HOST}/api/input`;
-const postUrl = "https://needed-sensibly-caribou.ngrok-free.app/api/input";
+const postUrl = `${process.env.NEXT_PUBLIC_HOST}/api/input`;
+
 export async function generateMetadata(): Promise<Metadata> {
   const imageUrl = `${process.env.NEXT_PUBLIC_HOST}/api/image?section=1`;
   return {

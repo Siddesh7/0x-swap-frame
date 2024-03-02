@@ -1,8 +1,8 @@
 import {NextResponse} from "next/server";
 import axios from "axios";
-import {createPublicClient, createWalletClient, http} from "viem";
+import {createWalletClient, http} from "viem";
 import {privateKeyToAccount} from "viem/accounts";
-import {polygon, sepolia} from "viem/chains";
+import {polygon} from "viem/chains";
 import {ABI, ADDRESS} from "@/app/lib/constants";
 import {getAddressForFid} from "frames.js";
 
@@ -47,10 +47,6 @@ export async function POST(req: any) {
 
   const walletClient = createWalletClient({
     account,
-    chain: polygon,
-    transport: http(process.env.ALCHEMY_RPC_URL || ""),
-  });
-  const publicClient = createPublicClient({
     chain: polygon,
     transport: http(process.env.ALCHEMY_RPC_URL || ""),
   });

@@ -72,7 +72,7 @@ const getSection = (section: string, text?: any) => {
       return (
         <div
           style={{
-            fontSize: "60px",
+            fontSize: "80px",
             padding: "0 200px",
             textAlign: "center",
             color: "white",
@@ -80,13 +80,14 @@ const getSection = (section: string, text?: any) => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
+            gap: "40px",
           }}
         >
-          <span>You are now swapping</span>
+          <span style={{fontSize: "100px"}}>You are now swapping</span>
           <span style={{color: "black"}}>
             ${text.fromToken} to ${text.toToken}
           </span>
-          <span>Fill in the buy amount in the field below.</span>
+          <span>Fill in the buy amount.</span>
         </div>
       );
 
@@ -102,9 +103,10 @@ const getSection = (section: string, text?: any) => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
+            gap: "40px",
           }}
         >
-          <span>You are spending </span>
+          <span style={{fontSize: "100px"}}>You are spending </span>
           <span
             style={{
               color: "white",
@@ -124,7 +126,7 @@ const getSection = (section: string, text?: any) => {
       return (
         <div
           style={{
-            fontSize: "60px",
+            fontSize: "80px",
             padding: "0 200px",
             textAlign: "center",
             color: "white",
@@ -142,10 +144,10 @@ const getSection = (section: string, text?: any) => {
       return (
         <div
           style={{
-            fontSize: "60px",
+            fontSize: "80px",
             padding: "0 200px",
             textAlign: "center",
-            color: "white",
+            color: "red",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",

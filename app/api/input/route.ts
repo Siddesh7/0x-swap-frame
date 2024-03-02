@@ -12,8 +12,8 @@ export async function POST(req: any) {
       `<!DOCTYPE html>
       <html>
         <head>
-          <title>Echo Says:</title>
-          <meta property="og:title" content="Echo Says:" />
+          <title>frameSwap:</title>
+          <meta property="og:title" content="frameSwap:" />
           <meta property="og:image" content="${imageURL}" />
           <meta name="fc:frame" content="vNext" />
         
@@ -34,8 +34,7 @@ export async function POST(req: any) {
     );
   }
   const imageURL = `${process.env.NEXT_PUBLIC_HOST}/api/image?section=2&buyToken=${tokenPair.buyTokenName}&sellToken=${tokenPair.sellTokenName}`;
-  //   const postUrl = `${process.env.NEXT_PUBLIC_HOST}/api/swap`;
-  const postUrl = `https://needed-sensibly-caribou.ngrok-free.app/api/price?buyToken=${tokenPair.buyToken}&sellToken=${tokenPair.sellToken}&buyTokenDecimal=${tokenPair.buyTokenDecimals}&sellTokenDecimal=${tokenPair.sellTokenDecimals}`;
+  const postUrl = `${process.env.NEXT_PUBLIC_HOST}/api/price?buyToken=${tokenPair.buyToken}&sellToken=${tokenPair.sellToken}&buyTokenDecimal=${tokenPair.buyTokenDecimals}&sellTokenDecimal=${tokenPair.sellTokenDecimals}`;
 
   return new NextResponse(
     `<!DOCTYPE html>

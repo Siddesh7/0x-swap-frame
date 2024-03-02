@@ -55,6 +55,20 @@ export function getTokenName(address: string) {
       return null;
   }
 }
+export function getTokenAddress(tokenName: string) {
+  switch (tokenName) {
+    case "USDC":
+      return "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359";
+    case "USDT":
+      return "0xc2132D05D31c914a87C6611C10748AEb04B58e8F";
+    case "GRT":
+      return "0x5fe2B58c013d7601147DcdD68C143A77499f5531";
+    case "UNI":
+      return "0xb33EaAd8d922B1083446DC23f610c2567fB5180f";
+    default:
+      return null;
+  }
+}
 
 export const ABI = [
   {

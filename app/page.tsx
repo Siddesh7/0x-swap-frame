@@ -1,7 +1,7 @@
 import {Metadata} from "next";
 
-const postUrl = `${process.env.NEXT_PUBLIC_HOST}/api/swap`;
-
+// const postUrl = `${process.env.NEXT_PUBLIC_HOST}/api/input`;
+const postUrl = "https://needed-sensibly-caribou.ngrok-free.app/api/input";
 export async function generateMetadata(): Promise<Metadata> {
   const imageUrl = `${process.env.NEXT_PUBLIC_HOST}/api/image?section=1`;
   return {
@@ -15,10 +15,10 @@ export async function generateMetadata(): Promise<Metadata> {
       "fc:frame": "vNext",
       "fc:frame:image": imageUrl,
       "fc:frame:post_url": postUrl,
-      "fc:frame:button:1": "USDC->USDT",
-      "fc:frame:button:2": "USDT->WMATIC",
-      "fc:frame:button:3": "USDT->UNI",
-      "fc:frame:button:4": "USDT->USDC",
+      "fc:frame:button:1": "USDT->USDC",
+      "fc:frame:button:2": "GRT->USDT",
+      "fc:frame:button:3": "UNI->USDT",
+      "fc:frame:button:4": "USDC->USDT",
     },
   };
 }

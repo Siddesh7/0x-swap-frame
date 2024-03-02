@@ -7,10 +7,12 @@ export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
   const section = searchParams.get("section") ?? "1";
   const swapObject = {
-    fromToken: searchParams.get("fromToken") ?? "NULL",
-    toToken: searchParams.get("toToken") ?? "NULL",
+    fromToken: searchParams.get("sellToken") ?? "NULL",
+    toToken: searchParams.get("buyToken") ?? "NULL",
     sellAmount: searchParams.get("sellAmount") ?? "0",
     buyAmount: searchParams.get("buyAmount") ?? "0",
+    buyTokenDecimals: searchParams.get("buyTokenDecimal") ?? "0",
+    sellTokenDecimals: searchParams.get("sellTokenDecimal") ?? "0",
   };
   return new ImageResponse(
     (
@@ -111,7 +113,8 @@ const getSection = (section: string, text?: any) => {
               borderRadius: "25px",
             }}
           >
-            {text.sellAmount} ${text.fromToken} to buy ${text.buyAmount}{" "}
+            {text.sellAmount / 10 ** text.sellTokenDecimals} ${text.fromToken}{" "}
+            to buy {text.buyAmount / 10 ** text.buyTokenDecimals} $
             {text.toToken}
           </span>
           <span>Click proceed to swap.</span>
@@ -133,6 +136,23 @@ const getSection = (section: string, text?: any) => {
         >
           <span>Swap tx sent!</span>
           <span>Check your wallet or check in polygonscan.</span>
+        </div>
+      );
+    case "error":
+      return (
+        <div
+          style={{
+            fontSize: "60px",
+            padding: "0 200px",
+            textAlign: "center",
+            color: "white",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <span>Something went wrong! Try again</span>
         </div>
       );
 

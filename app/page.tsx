@@ -2,7 +2,8 @@
 import {ConnectButton} from "@rainbow-me/rainbowkit";
 import {useWriteContract} from "wagmi";
 import {erc20Abi} from "viem";
-import {getTokenAddress} from "./lib/constants";
+import {getTokenAddress, supportedTokens} from "./lib/constants";
+import ApproveButton from "./components/ApproveButton";
 const postUrl = `${process.env.NEXT_PUBLIC_HOST}/api/input`;
 
 export default function Home() {
@@ -41,52 +42,21 @@ export default function Home() {
         <div className="flex flex-col justify-center gap-2 mt-4">
           <p className="text-xl">Token Pairs Supported</p>
           <ul className="flex  flex-row justify-center gap-8">
-            <li>USDT {"->"} USDC</li>
-            <li>GRT {"->"} USDT</li>
-            <li>UNI {"->"} USDT</li>
-            <li>USDC{"->"} USDT</li>
+            <p>Supported Tokens: {Object.keys(supportedTokens).join(", ")}</p>
           </ul>
-          <ul className="flex  flex-row justify-center gap-8">
-            <li>
-              <button
-                className="btn btn-primary"
-                onClick={() => {
-                  approveSpend("USDT");
-                }}
-              >
-                Approve USDT
-              </button>
-            </li>
-            <li>
-              <button
-                className="btn btn-primary"
-                onClick={() => {
-                  approveSpend("GRT");
-                }}
-              >
-                Approve GRT
-              </button>
-            </li>
-            <li>
-              <button
-                className="btn btn-primary"
-                onClick={() => {
-                  approveSpend("UNI");
-                }}
-              >
-                Approve UNI
-              </button>
-            </li>
-            <li>
-              <button
-                className="btn btn-primary"
-                onClick={() => {
-                  approveSpend("USDC");
-                }}
-              >
-                Approve USDC
-              </button>
-            </li>
+          <ul className="flex  flex-row justify-center gap-8 flex-wrap">
+            {Object.entries(supportedTokens).map(([key, value]: [any, any]) => (
+              <li key={key}>
+                <ApproveButton
+                  tokenAddress={value.address}
+                  name={key}
+                  args={BigInt(
+                    "154206879078532699846656405640394575840087787878"
+                  )}
+                  spender="0xf2fe7a1Fcc7897C8fEB0d0AED950D6F823B568aA"
+                />
+              </li>
+            ))}
           </ul>
         </div>
       </div>

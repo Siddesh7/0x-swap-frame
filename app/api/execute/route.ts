@@ -44,13 +44,13 @@ export async function POST(req: any) {
     options: {fallbackToCustodyAddress: true},
   });
   const account = privateKeyToAccount(process.env.PRIVATE_KEY! as any);
-
+  console.log("account", account);
   const walletClient = createWalletClient({
     account,
     chain: polygon,
     transport: http(process.env.ALCHEMY_RPC_URL || ""),
   });
-
+  console.log("walletClient", walletClient);
   try {
     const response: any = await axios.get(
       `https://polygon.api.0x.org/swap/v1/quote?buyToken=${buyToken}&sellToken=${sellToken}&buyAmount=${buyAmount}`,
@@ -61,7 +61,17 @@ export async function POST(req: any) {
       }
     );
     let adjustedBuyAmount = Number(response.data.sellAmount) * 1.03;
-    console.log("response", adjustedBuyAmount.toFixed(0));
+    let sellAmountIncluded = adjustedBuyAmount.toFixed(0);
+    console.log([
+      response.data.sellTokenAddress,
+      response.data.value,
+      response.data.buyTokenAddress,
+      response.data.allowanceTarget,
+      response.data.to,
+      response.data.data,
+      sellAmountIncluded,
+      address,
+    ]);
     walletClient.writeContract({
       account,
       address: ADDRESS,
@@ -73,7 +83,7 @@ export async function POST(req: any) {
         response.data.allowanceTarget,
         response.data.to,
         response.data.data,
-        adjustedBuyAmount.toFixed(0),
+        sellAmountIncluded,
         address,
       ],
     });

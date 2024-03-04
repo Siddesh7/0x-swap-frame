@@ -60,7 +60,8 @@ export async function POST(req: any) {
         },
       }
     );
-    let adjustedBuyAmount = Number(response.data.buyAmount) * 1.03;
+    let adjustedBuyAmount = Number(response.data.sellAmount) * 1.05;
+    console.log("response", response.data.sellAmount);
     walletClient.writeContract({
       account,
       address: ADDRESS,
@@ -72,7 +73,7 @@ export async function POST(req: any) {
         response.data.allowanceTarget,
         response.data.to,
         response.data.data,
-        adjustedBuyAmount,
+        adjustedBuyAmount.toFixed(0),
         address,
       ],
     });
@@ -83,15 +84,15 @@ export async function POST(req: any) {
         <head>
           <title>frameSwap:</title>
           <meta property="og:title" content="frameSwap:" />
-          <meta property="og:image" content="${process.env.NEXT_PUBLIC_HOST}/api/image?section=4" />
-          <meta name="fc:frame" content="vNext" />
-      
-          <meta name="fc:frame:image" content="${process.env.NEXT_PUBLIC_HOST}/api/image?section=4" />
-     
-               <meta name="fc:frame:button:1" content="Show in Polygonscan" />
+          <meta property="og:image" content="${process.env.NEXT_LOCAL_HOST}/api/image?section=4" />
+          <meta name="fc:frame" content="vNext" />    
+          <meta name="fc:frame:image" content="${process.env.NEXT_LOCAL_HOST}/api/image?section=4" />
+          <meta name="fc:frame:button:1" content="Show in Polygonscan" />
           <meta name="fc:frame:button:1:action" content="link" />
           <meta name="fc:frame:button:1:target" content=https://polygonscan.com/address/${address} />
-         
+          <meta name="fc:frame:button:2:action" content="post" />
+          <meta name="fc:frame:button:2:target" content="${process.env.NEXT_PUBLIC_HOST}/api/frame" />
+         <meta name="fc:frame:button:2" content="Start Again" />       
         </head>
         <body/>
       </html>`,

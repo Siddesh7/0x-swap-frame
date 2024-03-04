@@ -1,8 +1,8 @@
 import {Metadata} from "next";
 const postUrl = `${process.env.NEXT_PUBLIC_HOST}/api/input`;
+const imageUrl = `${process.env.NEXT_LOCAL_HOST}/api/image?section=1`;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const imageUrl = `${process.env.NEXT_PUBLIC_HOST}/api/image?section=1`;
   return {
     title: "frameSwap",
     description: "Swap within warpcast!",
@@ -17,7 +17,8 @@ export async function generateMetadata(): Promise<Metadata> {
       "fc:frame:button:1": "USDT->USDC",
       "fc:frame:button:2": "GRT->USDT",
       "fc:frame:button:3": "UNI->USDT",
-      "fc:frame:button:4": "USDC->USDT",
+      "fc:frame:button:4": "Custom pair",
+      "fc:frame:input:text": "custom: eg. USDT to USDC",
     },
   };
 }

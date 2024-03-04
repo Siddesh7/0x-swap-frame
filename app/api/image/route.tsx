@@ -1,5 +1,6 @@
 import {NextRequest} from "next/server";
 import {ImageResponse} from "next/og";
+import {supportedTokens} from "@/app/lib/constants";
 
 export const dynamic = "force-dynamic";
 
@@ -14,6 +15,7 @@ export async function GET(req: NextRequest) {
     buyTokenDecimals: searchParams.get("buyTokenDecimal") ?? "0",
     sellTokenDecimals: searchParams.get("sellTokenDecimal") ?? "0",
   };
+  const message = searchParams.get("message") ?? "NULL";
   return new ImageResponse(
     (
       <div
@@ -24,17 +26,11 @@ export async function GET(req: NextRequest) {
           justifyContent: "center",
           width: "1528px", // Set width to 1528px
           height: "800px", // Set height to 800px
-          background: "linear-gradient(to right, #00f260, #00e5ff)", // Add background gradient
+          background: "linear-gradient(to right, #432889, #17101F)", // Add background gradient
           position: "relative",
         }}
       >
-        {getSection(section, swapObject)}
-        <img
-          src={`${process.env.NEXT_PUBLIC_HOST}/0xlogo.png`}
-          alt=""
-          style={{position: "absolute", bottom: "0", left: "450"}}
-          width={"600px"}
-        />
+        {getSection(section, swapObject, message)}
       </div>
     ),
     {
@@ -44,7 +40,7 @@ export async function GET(req: NextRequest) {
   );
 }
 
-const getSection = (section: string, text?: any) => {
+const getSection = (section: string, text?: any, message?: any) => {
   switch (section) {
     case "1":
       return (
@@ -61,10 +57,12 @@ const getSection = (section: string, text?: any) => {
           }}
         >
           <span>
-            {" "}
             Now Swap directly from Warpcast with few clicks! Powered by 0x Swap
             API.
           </span>
+          <p style={{fontSize: "40px"}}>
+            Supported Tokens: ${Object.keys(supportedTokens).join(", $")}
+          </p>
         </div>
       );
 
@@ -84,8 +82,8 @@ const getSection = (section: string, text?: any) => {
           }}
         >
           <span style={{fontSize: "100px"}}>You are now swapping</span>
-          <span style={{color: "black"}}>
-            ${text.fromToken} to ${text.toToken}
+          <span style={{color: "yellow"}}>
+            ${text.fromToken} {"->"} ${text.toToken}
           </span>
           <span>Fill in the buy amount.</span>
         </div>
@@ -106,17 +104,17 @@ const getSection = (section: string, text?: any) => {
             gap: "40px",
           }}
         >
-          <span style={{fontSize: "100px"}}>You are spending </span>
+          <span style={{fontSize: "100px"}}>You are Swapping </span>
           <span
             style={{
-              color: "white",
-              backgroundColor: "black",
+              color: "yellow",
+
               padding: "25px",
               borderRadius: "25px",
             }}
           >
             {text.sellAmount / 10 ** text.sellTokenDecimals} ${text.fromToken}{" "}
-            to buy {text.buyAmount / 10 ** text.buyTokenDecimals} $
+            {"->"} {text.buyAmount / 10 ** text.buyTokenDecimals} $
             {text.toToken}
           </span>
           <span>Click proceed to swap.</span>
@@ -152,9 +150,11 @@ const getSection = (section: string, text?: any) => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
+            gap: "40px",
           }}
         >
           <span>Something went wrong! Try again</span>
+          <span>{message}</span>
         </div>
       );
 

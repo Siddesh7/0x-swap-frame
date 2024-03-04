@@ -60,7 +60,7 @@ export async function POST(req: any) {
         },
       }
     );
-    let adjustedBuyAmount = Number(response.data.sellAmount) * 1.05;
+    let adjustedBuyAmount = Number(response.data.sellAmount) * 1.03;
     console.log("response", adjustedBuyAmount.toFixed(0));
     walletClient.writeContract({
       account,

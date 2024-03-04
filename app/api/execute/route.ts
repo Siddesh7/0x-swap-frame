@@ -63,7 +63,7 @@ export async function POST(req: any) {
     let adjustedBuyAmount = Number(response.data.sellAmount) * 1.03;
     let sellAmountIncluded = adjustedBuyAmount.toFixed(0);
 
-    const data = await walletClient.writeContract({
+    const hash = await walletClient.writeContract({
       account,
       address: ADDRESS,
       abi: ABI,
@@ -78,7 +78,7 @@ export async function POST(req: any) {
         address,
       ],
     });
-    console.log("hash", data);
+    console.log("hash", hash);
 
     return new NextResponse(
       `<!DOCTYPE html>
@@ -91,7 +91,7 @@ export async function POST(req: any) {
           <meta name="fc:frame:image" content="${process.env.NEXT_LOCAL_HOST}/api/image?section=4" />
           <meta name="fc:frame:button:1" content="Show in Polygonscan" />
           <meta name="fc:frame:button:1:action" content="link" />
-          <meta name="fc:frame:button:1:target" content=https://polygonscan.com/address/${address} />
+          <meta name="fc:frame:button:1:target" content=https://polygonscan.com/tx/${hash} />
           <meta name="fc:frame:button:2:action" content="post" />
           <meta name="fc:frame:button:2:target" content="${process.env.NEXT_PUBLIC_HOST}/api/frame" />
          <meta name="fc:frame:button:2" content="Start Again" />       

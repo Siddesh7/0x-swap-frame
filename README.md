@@ -6,11 +6,8 @@ https://0x-frame.vercel.app/frame can be shared as cast and make the swaps withi
 ### Prerequisites:
 Before being able to swap, you should provide allowance to the swap contract deployed at [0xf2fe7a1fcc7897c8feb0d0aed950d6f823b568aa](https://polygonscan.com/address/0xf2fe7a1fcc7897c8feb0d0aed950d6f823b568aa) in Polygon Mainnet. You can do that via the frontend hosted at https://0x-frame.vercel.app or using the block explorer.
 
-### Available Token Pairs
-- USDC -> USDT
-- USDT -> USDC
-- UNI -> USDT
-- GRT -> USDT
+### Available Tokens
+BUSD, DAI, USDT, USDC, GRT, UNI, AAVE, APE, AXL, MANA, CRV, GNO, 1INCH, COMP, FTM, LINK, SHIB, AVAX
 
 ### Images
 ![Screenshot 2024-03-02 at 8 00 02 PM](https://github.com/Siddesh7/0x-swap-frame/assets/79219618/0b7aa3b7-ddb8-464f-962a-b60756747d26)

@@ -39,10 +39,10 @@ export async function POST(req: any) {
     untrustedData: {fid},
   } = await req.json();
 
-  const address = await getAddressForFid({
-    fid,
-    options: {fallbackToCustodyAddress: true},
-  });
+  // const address = await getAddressForFid({
+  //   fid,
+  //   options: {fallbackToCustodyAddress: true},
+  // });
   const account = privateKeyToAccount(process.env.PRIVATE_KEY! as any);
 
   const walletClient = createWalletClient({
@@ -75,7 +75,7 @@ export async function POST(req: any) {
         response.data.to,
         response.data.data,
         sellAmountIncluded,
-        address,
+        fid,
       ],
     });
     console.log("hash", hash);

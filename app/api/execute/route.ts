@@ -11,6 +11,9 @@ export async function POST(req: any) {
   const buyAmount = searchParams.get("buyAmount") ?? "";
   const buyToken = searchParams.get("buyToken") ?? "";
   const sellToken = searchParams.get("sellToken") ?? "";
+  console.log("buyAmount", buyAmount);
+  console.log("buyToken", buyToken);
+  console.log("sellToken", sellToken);
 
   if (!sellToken || !buyToken || !buyAmount) {
     return new NextResponse(
@@ -38,6 +41,7 @@ export async function POST(req: any) {
   const {
     untrustedData: {fid},
   } = await req.json();
+  console.log("fid", fid);
 
   // const address = await getAddressForFid({
   //   fid,
